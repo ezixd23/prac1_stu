@@ -25,10 +25,17 @@ public class CSSync implements InterfaceSync {
 	
 	public void letMeDing(int id) {
 		/* COMPLETE */
+		// los "letMe" son todos iguales, solo cambia el IF
+		// el primer while bloquea la funcion para no dejar hacer el print
 		while (true) {
+			// segundo while comprueva si hay permiso para comprovar si se puede hacer el print
+			// si se puede, cierra el while i bloquea el permiso para comprovar
 			while (!canCheck.compareAndSet(true, false)) {
 				this.backOff();
 			}
+			// comprovamos si nos toca hacer el print
+			// si toca, hacemos break para salir del primer while y asi desbloquear la funcion
+			// si no toca, desbloqueamos el permiso para comprovar
 			if(!(id != expectedId || !((this.lastPrinted == DONG || this.lastPrinted == DING) && this.dingCount < 3))) {
 				break;
 			} else {
