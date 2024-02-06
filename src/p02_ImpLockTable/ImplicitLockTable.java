@@ -5,22 +5,19 @@ import p00_CommonA.Table;
 public class ImplicitLockTable extends Table{
 	
 	/* Declare and initialize tour simple-typed variables here */
-	private boolean permission = true;
+	private volatile boolean permission = true;
+	private volatile int firstCard = -1;
 
-	protected synchronized void gainExclusiveAccess() {
+	protected void gainExclusiveAccess() {
 		/* COMPLETE */
-		while (!this.permission || this.ffs >= 4) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		while (!this.permission) {
+			Thread.yield();
 		}
 		this.permission = false;
 	}
 
 
-	protected synchronized void releaseExclusiveAccess() {
+	protected void releaseExclusiveAccess() {
 		/* COMPLETE */
 		this.permission = true;
 	}
@@ -28,19 +25,49 @@ public class ImplicitLockTable extends Table{
 
 	public void putJack(int id) {
 		/* COMPLETE */
-		this.gainExclusiveAccess();
+		while (true) {
+			synchronized (this) {
+				this.gainExclusiveAccess();
+				if (ffs < 3 || (firstCard == 0 && ffs == 3)) {
+					break;
+				} else {
+					this.releaseExclusiveAccess();
+				}
+			}
+		}
+		if(this.ffs == 0) this.firstCard = 0;
 	}
 
 	
 	public void putQueen(int id) {
 		/* COMPLETE */
-		this.gainExclusiveAccess();
+		while (true) {
+			synchronized (this) {
+				this.gainExclusiveAccess();
+				if (ffs < 3 || (firstCard == 1 && ffs == 3)) {
+					break;
+				} else {
+					this.releaseExclusiveAccess();
+				}
+			}
+		}
+		if(this.ffs == 0) this.firstCard = 1;
 	}
 
 	
 	public void putKing(int id) {
 		/* COMPLETE */
-		this.gainExclusiveAccess();
+		while (true) {
+			synchronized (this) {
+				this.gainExclusiveAccess();
+				if (ffs < 3 || (firstCard == 2 && ffs == 3)) {
+					break;
+				} else {
+					this.releaseExclusiveAccess();
+				}
+			}
+		}
+		if(this.ffs == 0) this.firstCard = 2;
 	}
 
 
