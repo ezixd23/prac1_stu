@@ -10,5 +10,8 @@ public interface CoolDownSupport {
 		
 	
 	public void coolDownDone();
+
+	public void coolDownIsReady();
+
 }
 
