@@ -14,13 +14,7 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 	
 	protected void gainExclusiveAccess() {
 		/* COMPLETE */
-		while (true) {
-			this.lock.lock();
-			if (this.ffs < 4)
-				break;
-			else
-				this.lock.unlock();
-		}
+		this.lock.lock();	
 	}
 
 
@@ -32,7 +26,13 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 
 	public void putJack(int id) {
 		/* COMPLETE */
-		this.gainExclusiveAccess();
+		while (true) {
+			this.gainExclusiveAccess();
+			if (this.ffs < 4 && this.ffs != 3)
+				break;
+			else
+				this.releaseExclusiveAccess();
+		}
 		this.lastCard = 0;
 		this.lastId = id;
 	}
@@ -40,7 +40,13 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 	
 	public void putQueen(int id) {
 		/* COMPLETE */
-		this.gainExclusiveAccess();
+		while (true) {
+			this.gainExclusiveAccess();
+			if (this.ffs < 3 || (this.ffs == 3 && id % 2 == 0))
+				break;
+			else
+				this.releaseExclusiveAccess();
+		}
 		this.lastCard = 1;
 		this.lastId = id;
 	}
@@ -48,7 +54,13 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 	
 	public void putKing(int id) {
 		/* COMPLETE */
-		this.gainExclusiveAccess();
+		while (true) {
+			this.gainExclusiveAccess();
+			if (this.ffs < 4 && this.ffs != 3)
+				break;
+			else
+				this.releaseExclusiveAccess();
+		}
 		this.lastCard = 2;
 		this.lastId = id;
 	}
