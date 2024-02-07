@@ -18,7 +18,7 @@ public class CoolDownThread extends Thread {
 			/* COMPLETE */
 			// aquests dos els treurem
 			CDSupport.coolDownIsReady();
-			CDSupport.letCoolDownRun();
+			//CDSupport.letCoolDownRun();
 			
 			System.out.println("\n");
 			System.out.print("\tCOOLING DOWN: ");

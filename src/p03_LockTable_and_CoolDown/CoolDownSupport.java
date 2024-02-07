@@ -7,7 +7,7 @@ package p03_LockTable_and_CoolDown;
 public interface CoolDownSupport {
 
 	/* COMPLETE: add the necessary methods */
-		
+	public void coolDownIsReady();	
 	
 	public void coolDownDone();
 }
