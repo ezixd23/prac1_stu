@@ -30,7 +30,7 @@ public class MutexTable extends Table{
 		/* COMPLETE */
 		while(true) {
 			this.gainExclusiveAccess();
-			if((id==0 && this.ffs==0)|| (id==1 && this.ffs==3) || this.ffs < 3) {
+			if((id==0 && this.ffs==0)|| (id==1 && this.ffs==3)  || (this.ffs>0 && this.ffs<3)) {
 				break;
 			}else this.releaseExclusiveAccess();
 		}
@@ -40,7 +40,7 @@ public class MutexTable extends Table{
 		/* COMPLETE */
 		while(true) {
 			this.gainExclusiveAccess();
-			if((id==0 && this.ffs==0)|| (id==1 && this.ffs==3) || this.ffs < 3) {
+			if((id==0 && this.ffs==0)|| (id==1 && this.ffs==3)  || (this.ffs>0 && this.ffs<3)) {
 				break;
 			}else this.releaseExclusiveAccess();
 		}
@@ -50,7 +50,7 @@ public class MutexTable extends Table{
 		/* COMPLETE */
 		while(true) {
 			this.gainExclusiveAccess();
-			if((id==0 && this.ffs==0)||(id==1 && this.ffs==3) || this.ffs < 3) {
+			if((id==0 && this.ffs==0)||(id==1 && this.ffs==3) || (this.ffs>0 && this.ffs<3)) {
 				break;
 			}else this.releaseExclusiveAccess();
 		}
