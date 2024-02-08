@@ -74,12 +74,8 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 	
 	public void startCheck(int id) {
 		/* COMPLETE */
-		while (true) {
-			this.lock.lock();
-			if (this.ffs >= 4)
-				break;
-			else
-				this.lock.unlock();
+		while (this.ffs < 4) {
+			Thread.yield();
 		}
 	}
 
@@ -87,7 +83,6 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 	public void endCheck(int id) {
 		/* COMPLETE */
 		this.ffs = 0;
-		this.lock.unlock();
 	}
 
 
