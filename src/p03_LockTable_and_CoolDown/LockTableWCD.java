@@ -29,7 +29,7 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 		/* COMPLETE */
 		while(true) {
 			this.gainExclusiveAccess();
-			if ((queen && ffs == 3) || ffs < 3) {
+			if (ffs < 3) {
 				break;
 			} else {
 				this.releaseExclusiveAccess();
@@ -58,12 +58,13 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 		/* COMPLETE */
 		while(true) {
 			this.gainExclusiveAccess();
-			if ((queen && ffs == 3) || ffs < 3) {
+			if ( ffs < 3) {
 				if(ffs == 2) king = true;
-				else king=false;
 				break;
 			} else {
+				king = false;
 				this.releaseExclusiveAccess();
+				
 			}
 		}
 	}
@@ -111,7 +112,7 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 		// TODO Auto-generated method stub
 		while (true) {
 			this.lock.lock();
-			if (this.king && this.ffs == 2)
+			if (this.ffs == 2 && this.king)
 				break;
 			else
 				this.lock.unlock();
