@@ -79,7 +79,7 @@ public class ImplicitLockTable extends Table{
 	
 	public void startCheck(int id) {
 		/* COMPLETE */
-		while (this.ffs < 4) {}
+		while (this.ffs < 4) Thread.yield();
 	}
 
 	
