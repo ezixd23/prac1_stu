@@ -10,8 +10,8 @@ public class LockTableWCD extends Table implements CoolDownSupport{
 	
 	/* Declare and initialize here the required simple-typed variables */
 	
-	private boolean queen = false;
-	private boolean king = false;
+	private volatile boolean queen = false;
+	private volatile boolean king = false;
 	
 	protected void gainExclusiveAccess() {
 		/* COMPLETE */
